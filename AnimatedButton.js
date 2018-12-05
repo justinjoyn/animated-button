@@ -79,7 +79,7 @@ export default class AnimatedButton extends Component {
                             strokeCap={'round'}
                             thickness={3}
                             borderWidth={0}
-                            size={48}
+                            size={50}
                             indeterminate={progress === 0}
                             animated={true}
                             color={progress === 0 ? '#EEEFF4' : '#1E62B3'}
@@ -133,8 +133,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     stopButton: {
-        width: 18,
-        height: 18,
+        width: 20,
+        height: 20,
         backgroundColor: '#1E62B3',
         borderRadius: 2,
         position: 'absolute'
