@@ -28,22 +28,26 @@ export default class AnimatedButton extends Component {
     }
 
     showDownloadButton() {
+        this.downloadButtonScale.setValue(0);
+        this.downloadButtonOpacity.setValue(0);
         Animated.parallel([
             Animated.spring(this.downloadButtonScale, {toValue: 1, speed: 1, bounciness: 0, useNativeDriver: true}),
-            Animated.timing(this.downloadButtonOpacity, {toValue: 1, duration: 100, useNativeDriver: true})
+            Animated.timing(this.downloadButtonOpacity, {toValue: 1, duration: 200, useNativeDriver: true})
         ]).start();
     }
 
     showOpenButton() {
+        this.openButtonScale.setValue(0);
+        this.openButtonOpacity.setValue(0);
         Animated.parallel([
             Animated.spring(this.openButtonScale, {toValue: 1, speed: 1, bounciness: 0, useNativeDriver: true}),
-            Animated.timing(this.openButtonOpacity, {toValue: 1, duration: 100, useNativeDriver: true})
+            Animated.timing(this.openButtonOpacity, {toValue: 1, duration: 200, useNativeDriver: true})
         ]).start();
     }
 
     onDownloadPressed() {
         Animated.parallel([
-            Animated.spring(this.downloadButtonScale, {toValue: 0.2, speed: 1, bounciness: 0, useNativeDriver: true}),
+            Animated.spring(this.downloadButtonScale, {toValue: 0, speed: 1, bounciness: 0, useNativeDriver: true}),
             Animated.timing(this.downloadButtonOpacity, {toValue: 0, duration: 100, useNativeDriver: true})
         ]).start(() => {
             this.props.onDownloadPressed();
@@ -52,7 +56,7 @@ export default class AnimatedButton extends Component {
 
     onOpenPressed() {
         Animated.parallel([
-            Animated.spring(this.openButtonScale, {toValue: 0.2, speed: 1, bounciness: 0, useNativeDriver: true}),
+            Animated.spring(this.openButtonScale, {toValue: 0, speed: 1, bounciness: 0, useNativeDriver: true}),
             Animated.timing(this.openButtonOpacity, {toValue: 0, duration: 100, useNativeDriver: true})
         ]).start(() => {
             this.props.onOpenPressed();
