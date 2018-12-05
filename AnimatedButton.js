@@ -20,7 +20,6 @@ export default class AnimatedButton extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log(this.state.buttonState);
         if (this.state.buttonState === 1) {
             this.showDownloadButton();
         } else if (this.state.buttonState === 3) {
@@ -30,32 +29,22 @@ export default class AnimatedButton extends Component {
 
     showDownloadButton() {
         Animated.parallel([
-            Animated.spring(this.downloadButtonScale, {
-                toValue: 1,
-                bounciness: 5,
-                velocity: 30,
-                useNativeDriver: true
-            }),
-            Animated.timing(this.downloadButtonOpacity, {toValue: 1, duration: 250, useNativeDriver: true})
+            Animated.spring(this.downloadButtonScale, {toValue: 1, speed: 1, bounciness: 0, useNativeDriver: true}),
+            Animated.timing(this.downloadButtonOpacity, {toValue: 1, duration: 100, useNativeDriver: true})
         ]).start();
     }
 
     showOpenButton() {
         Animated.parallel([
-            Animated.spring(this.openButtonScale, {toValue: 1, bounciness: 5, velocity: 30, useNativeDriver: true}),
-            Animated.timing(this.openButtonOpacity, {toValue: 1, duration: 250, useNativeDriver: true})
+            Animated.spring(this.openButtonScale, {toValue: 1, speed: 1, bounciness: 0, useNativeDriver: true}),
+            Animated.timing(this.openButtonOpacity, {toValue: 1, duration: 100, useNativeDriver: true})
         ]).start();
     }
 
     onDownloadPressed() {
         Animated.parallel([
-            Animated.spring(this.downloadButtonScale, {
-                toValue: 0.2,
-                bounciness: 5,
-                velocity: 30,
-                useNativeDriver: true
-            }),
-            Animated.timing(this.downloadButtonOpacity, {toValue: 0, duration: 250, useNativeDriver: true})
+            Animated.spring(this.downloadButtonScale, {toValue: 0.2, speed: 1, bounciness: 0, useNativeDriver: true}),
+            Animated.timing(this.downloadButtonOpacity, {toValue: 0, duration: 100, useNativeDriver: true})
         ]).start(() => {
             this.props.onDownloadPressed();
         });
@@ -63,8 +52,8 @@ export default class AnimatedButton extends Component {
 
     onOpenPressed() {
         Animated.parallel([
-            Animated.spring(this.openButtonScale, {toValue: 0.2, bounciness: 5, velocity: 30, useNativeDriver: true}),
-            Animated.timing(this.openButtonOpacity, {toValue: 0, duration: 250, useNativeDriver: true})
+            Animated.spring(this.openButtonScale, {toValue: 0.2, speed: 1, bounciness: 0, useNativeDriver: true}),
+            Animated.timing(this.openButtonOpacity, {toValue: 0, duration: 100, useNativeDriver: true})
         ]).start(() => {
             this.props.onOpenPressed();
         });

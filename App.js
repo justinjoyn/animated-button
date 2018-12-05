@@ -6,6 +6,7 @@ export default class App extends Component {
 
     constructor(props) {
         super(props);
+        let intervalId = null;
         this.state = {
             progress: 0,
             buttonState: 1
@@ -13,22 +14,23 @@ export default class App extends Component {
     }
 
     simulateDownload() {
-        let intervalId = setInterval(() => {
+        this.intervalId = setInterval(() => {
             if (this.state.progress <= 1) {
                 this.setState({progress: this.state.progress + 0.05});
             } else {
                 this.setState({buttonState: 3});
-                clearInterval(intervalId);
+                clearInterval(this.intervalId);
             }
         }, 100);
     }
 
     _onDownloadPressed() {
         this.setState({buttonState: 2});
-        setTimeout(this.simulateDownload.bind(this), 2000);
+        setTimeout(this.simulateDownload.bind(this), 1000);
     }
 
     _onStopPressed() {
+        clearInterval(this.intervalId);
         this.setState({buttonState: 1, progress: 0});
     }
 
