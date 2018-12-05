@@ -1,49 +1,73 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import AnimatedButton from "./AnimatedButton";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+export default class App extends Component {
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            progress: 0,
+            buttonState: 1
+        }
+    }
+
+    simulateDownload() {
+        let intervalId = setInterval(() => {
+            if (this.state.progress <= 1) {
+                this.setState({progress: this.state.progress + 0.05});
+            } else {
+                this.setState({buttonState: 3});
+                clearInterval(intervalId);
+            }
+        }, 100);
+    }
+
+    _onDownloadPressed() {
+        this.setState({buttonState: 2});
+        setTimeout(this.simulateDownload.bind(this), 2000);
+    }
+
+    _onStopPressed() {
+        this.setState({buttonState: 1, progress: 0});
+    }
+
+    _onOpenPressed() {
+        this.setState({buttonState: 1, progress: 0});
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <StatusBar backgroundColor={'#FFF'} barStyle={"dark-content"}/>
+                <Text style={styles.instructions}>
+                    Pressing the DOWNLOAD button will simulate a download progress. During the download STOP button is
+                    displayed, which when clicked will stp the progress. Press the OPEN button will reset the button to
+                    initial state.
+                </Text>
+                <AnimatedButton
+                    progress={this.state.progress}
+                    buttonState={this.state.buttonState}
+                    onDownloadPressed={() => this._onDownloadPressed()}
+                    onStopPressed={() => this._onStopPressed()}
+                    onOpenPressed={() => this._onOpenPressed()}/>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFF',
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
+        fontFamily: 'Product Sans Regular',
+        padding: 20
+    },
 });
