@@ -41,9 +41,9 @@ export default class App extends Component {
             <View style={styles.container}>
                 <StatusBar backgroundColor={'#FFF'} barStyle={"dark-content"}/>
                 <Text style={styles.instructions}>
-                    Pressing the DOWNLOAD button will simulate a download progress. During the download STOP button is
-                    displayed, which when clicked will stp the progress. Press the OPEN button will reset the button to
-                    initial state.
+                    Press the DOWNLOAD button to simulate the downloading progress. During the download progress STOP
+                    button is displayed, which when clicked will stop the progress. Press the OPEN button to reset the
+                    button to initial state.
                 </Text>
                 <AnimatedButton
                     progress={this.state.progress}
